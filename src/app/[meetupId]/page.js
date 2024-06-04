@@ -14,4 +14,43 @@ function MeetupDetails() {
   );
 }
 
+export async function getStaticPaths() {
+  return {
+    fallback:true,
+    paths: [
+      {
+        params: {
+          meetupId: "m1",
+        },
+      },
+      {
+        params: {
+          meetupId: "m2",
+        },
+      },
+      {
+        params: {
+          meetupId: "m3",
+        },
+      },
+    ],
+  };
+}
+export async function getStaticProps(content) {
+  const meetupId = content.params.meetupId;
+
+  console.log(meetupId);
+  return {
+    props: {
+      meetupData: {
+        image:
+          "https://miro.medium.com/v2/resize:fit:800/1*cIrXKfM2lqGzVWLCr7ftnw.jpeg",
+        id: meetupId,
+        title: "First Meetup",
+        address: "some street up",
+        description: "The Meetup Description",
+      },
+    },
+  };
+}
 export default MeetupDetails;
